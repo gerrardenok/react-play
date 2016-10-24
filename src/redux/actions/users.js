@@ -1,31 +1,32 @@
-import {REQUEST_USERS, RECEIVE_USERS, RECEIVE_USERS_FAILURE} from '../actionTypes';
+import {USERS_FETCH_REQUEST, USERS_FETCH_SUCCESS, USERS_FETCH_FAILURE} from '../actionTypes';
 import fetch from 'isomorphic-fetch'
 
-export function requestUsers() {
+export function requestUsers(page, limit) {
   return {
-    type: REQUEST_USERS
+    type: USERS_FETCH_REQUEST,
+    page,
+    limit
   }
 }
 
 export function receiveUsers({results}) {
   return {
-    type: RECEIVE_USERS,
+    type: USERS_FETCH_SUCCESS,
     users: results
   }
 }
 
 export function receiveUsersFailure(error) {
   return {
-    type: RECEIVE_USERS_FAILURE,
+    type: USERS_FETCH_FAILURE,
     error
   }
 }
 
-export function fetchUsers() {
+export function fetchUsers(page = 1, limit = 10) {
   return dispatch => {
-    let limit = 20;
-    dispatch(requestUsers());
-    return fetch(`https://randomuser.me/api/?results=${limit}`)
+    dispatch(requestUsers(page, limit));
+    return fetch(`https://randomuser.me/api/?page=${page}&results=${limit}`)
       .then(
         response => response.json(),
         response => dispatch(receiveUsersFailure(response))

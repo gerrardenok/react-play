@@ -1,4 +1,6 @@
-
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "loader.css";
 
-@import "Footer";
+.users-list-component {
+  padding: 20px 0;
+}
