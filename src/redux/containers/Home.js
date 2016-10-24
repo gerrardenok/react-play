@@ -1,9 +1,8 @@
-import React from 'react';
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import Header from '../components/Header';
-import UsersList from '../components/UsersList';
-import {fetchUsers} from '../actions/users';
+import React from "react";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import UsersList from "../components/UsersList";
+import {fetchUsers} from "../actions/users";
 
 class HomeContainer extends React.Component {
   componentDidMount() {
@@ -14,22 +13,13 @@ class HomeContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header/>
-        <section className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <UsersList list={this.props.users.list} />
-            </div>
-          </div>
-        </section>
-      </div>
+      <UsersList list={this.props.users.list}/>
     );
   }
 }
 
 HomeContainer.defaultProps = {
-  users: { list: [] }
+  users: {list: []}
 };
 
 const mapStateToProps = (state) => ({

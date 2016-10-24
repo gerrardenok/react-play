@@ -1,18 +1,18 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 
-class UsersListComponent extends React.Component {
-  render(){
-    let rows = this.props.list.map((user) => (
-      <div key={user.email}>{user.email}</div>
-    ));
-    return (
-      <div>
-        <h2>Users list</h2>
-        <div>{rows}</div>
-      </div>
-    )
-  }
-}
+const UsersListComponent = (props) => (
+  <div>
+    <h2>Users list</h2>
+    <div>{
+      props.list.map((user) => (
+        <div key={user.email}>
+          <Link to={`/user/${user.id.value}`}>{user.email}</Link>
+        </div>
+      ))
+    }</div>
+  </div>
+);
 
 UsersListComponent.defaultProps = {
   list: []
