@@ -1,22 +1,23 @@
-import {REQUEST_USERS, RECEIVE_USERS, RECEIVE_USERS_FAILURE} from '../actionTypes';
+import {USERS_FETCH_REQUESTED, USERS_FETCH_SUCCEEDED, USERS_FETCH_FAILED} from "../actionTypes";
+
 import fetch from 'isomorphic-fetch'
 
 export function requestUsers() {
   return {
-    type: REQUEST_USERS
+    type: USERS_FETCH_REQUESTED
   }
 }
 
 export function receiveUsers({results}) {
   return {
-    type: RECEIVE_USERS,
+    type: USERS_FETCH_SUCCEEDED,
     users: results
   }
 }
 
 export function receiveUsersFailure(error) {
   return {
-    type: RECEIVE_USERS_FAILURE,
+    type: USERS_FETCH_FAILED,
     error
   }
 }

@@ -1,14 +1,12 @@
 import React from "react";
-import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import UsersList from "../components/UsersList";
-import {fetchUsers} from "../actions/users";
+import {USERS_FETCH_REQUESTED} from "../actionTypes";
 
 class HomeContainer extends React.Component {
   componentDidMount() {
     let {dispatch} = this.props;
-    let boundFetchUsers = bindActionCreators(fetchUsers, dispatch);
-    boundFetchUsers();
+    dispatch({type: USERS_FETCH_REQUESTED, payload: {limit: 20}})
   }
 
   render() {

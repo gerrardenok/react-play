@@ -18,6 +18,7 @@ UsersListComponent.defaultProps = {
   list: []
 };
 
+
 UsersListComponent.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,

@@ -1,12 +1,12 @@
-import {REQUEST_USERS, RECEIVE_USERS, RECEIVE_USERS_FAILURE} from '../actionTypes';
+import {USERS_FETCH_REQUESTED, USERS_FETCH_SUCCEEDED, USERS_FETCH_FAILED} from "../actionTypes";
 
 export default function(state = {}, action) {
   switch (action.type) {
-    case REQUEST_USERS:
+    case USERS_FETCH_REQUESTED:
       return {... state, isFetch: true};
-    case RECEIVE_USERS:
+    case USERS_FETCH_SUCCEEDED:
       return {... state, isFetch: false, list: action.users};
-    case RECEIVE_USERS_FAILURE:
+    case USERS_FETCH_FAILED:
       return {... state, isFetch: false, error: true};
     default:
       return state;
