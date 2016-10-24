@@ -4,10 +4,11 @@ import {Router, IndexRoute, Route, browserHistory} from 'react-router';
 import Layout from './Layout';
 import Home from './Home';
 import UserDetails from './UserDetails';
+import {syncHistoryWithStore} from 'react-router-redux';
 
 const RootContainer = ({ store }) => (
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={syncHistoryWithStore(browserHistory, store)}>
       <Route path="/" component={Layout} >
         <IndexRoute component={Home} />
         <Route path="/user/:userId" component={UserDetails} />
