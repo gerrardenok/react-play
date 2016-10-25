@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import UsersList from '../components/UsersList';
 import {fetchUsers} from '../actions/users';
 
-class HomeContainer extends React.Component {
+class UsersPageContainer extends React.Component {
   componentDidMount() {
     if (!this.props.users.list)
       this.props.fetchUsers();
@@ -28,4 +28,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersPageContainer);

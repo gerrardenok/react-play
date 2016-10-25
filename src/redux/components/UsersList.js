@@ -12,21 +12,23 @@ const UsersListComponent = (props) => (
         <th>Last</th>
         <th>Email</th>
         <th>Gender</th>
+        <th>Age</th>
         <th>City</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
       {
-        props.list.map((user) => (
-          <tr key={user.email}>
+        props.list.map((user, index) => (
+          <tr key={index}>
             <td>{user.name.first}</td>
             <td>{user.name.last}</td>
             <td>{user.email}</td>
             <td>{user.gender}</td>
+            <td>N/A</td>
             <td>{user.location.city}</td>
             <td>
-              <Link className="btn btn-warning btn-sm" to={`/user/${user.id.value}`}>Edit</Link>
+              <Link className="btn btn-warning btn-sm" to={`/user/${index}`}>Edit</Link>
               {' '}
               <Button color="danger" size="sm">Delete</Button>
             </td>

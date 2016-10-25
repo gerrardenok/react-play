@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import Header from '../components/Header'
 
-const LayoutComponent = (props) => (
+const LayoutContainer = (props) => (
   <div>
     <Header />
     <section className="container">
@@ -15,6 +15,6 @@ const LayoutComponent = (props) => (
   </div>
 );
 
-LayoutComponent.defaultProps = {};
+LayoutContainer.defaultProps = {};
 
-export default connect()(LayoutComponent);
+export default connect()(LayoutContainer);

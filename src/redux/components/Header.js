@@ -8,7 +8,7 @@ const HeaderComponent = () => (
       <NavbarBrand href="/">React-play</NavbarBrand>
       <Nav navbar>
         <NavItem>
-          <NavLink href="./docs/Task.pdf">Task</NavLink>
+          <NavLink href="/docs/Task.pdf">Task</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="https://randomuser.me/">RandomAPI</NavLink>

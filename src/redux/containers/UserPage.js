@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-class UserDetails extends React.Component {
+class UserDetailContainer extends React.Component {
   componentDidMount() {
     // load user
   }
@@ -13,10 +13,10 @@ class UserDetails extends React.Component {
   }
 }
 
-UserDetails.defaultProps = {};
+UserDetailContainer.defaultProps = {};
 
 const mapStateToProps = (state) => ({
   state: state
 });
 
-export default connect(mapStateToProps)(UserDetails);
+export default connect(mapStateToProps)(UserDetailContainer);
