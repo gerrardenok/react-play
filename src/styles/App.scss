@@ -1,3 +1,5 @@
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "loader.css";
 
@@ -8,4 +10,8 @@
 .jumbotron {
   margin-top: 20px;
   text-align: center;
+}
+
+.sort-ctrl {
+  cursor: pointer;
 }

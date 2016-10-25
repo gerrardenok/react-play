@@ -1,4 +1,4 @@
-import {USERS_FETCH_REQUEST, USERS_FETCH_SUCCESS, USERS_FETCH_FAILURE, SORT_USERS} from '../actionTypes';
+import {USERS_FETCH_REQUEST, USERS_FETCH_SUCCESS, USERS_FETCH_FAILURE, SET_USERS_SORT} from '../actionTypes';
 import fetch from 'isomorphic-fetch'
 
 export function usersFetchRequest(page, limit) {
@@ -23,9 +23,9 @@ export function usersFetchFailure(error) {
   }
 }
 
-export function sortUsers(field, value) {
+export function setUsersSort(field, value) {
   return {
-    type: SORT_USERS,
+    type: SET_USERS_SORT,
     field,
     value
   }

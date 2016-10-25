@@ -11,16 +11,16 @@ class SortComponent extends React.Component {
   };
 
   render() {
-    let inner = ((<span onClick={this.sortAsc}>[+]</span>));
+    let inner = ((<i className="fa fa-angle-double-left" onClick={this.sortAsc}>{''}</i>));
     if(this.props.values) {
       let val = this.props.values[this.props.field];
       if (val == 'asc')
-        inner = (<span onClick={this.sortDesc}>[asc]</span>);
+        inner = (<i className="fa fa-angle-double-up" onClick={this.sortDesc}>{''}</i>);
       if (val == 'desc')
-        inner = (<span onClick={this.sortAsc}>[desc]</span>);
+        inner = (<i className="fa fa-angle-double-down" onClick={this.sortAsc}>{''}</i>);
     }
     return (
-      <span>{inner}</span>
+      <span className="sort-ctrl float-xs-right">{inner}</span>
     )
   }
 }
