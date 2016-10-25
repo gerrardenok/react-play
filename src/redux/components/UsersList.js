@@ -1,68 +1,99 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {Pagination, PaginationItem, PaginationLink, Button } from 'reactstrap';
+import Sort from './Sort';
 
 
-const UsersListComponent = (props) => (
-  <div className="users-list-component">
-    <table className="table">
-      <thead>
-      <tr>
-        <th>First</th>
-        <th>Last</th>
-        <th>Email</th>
-        <th>Gender</th>
-        <th>Age</th>
-        <th>City</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      {
-        props.list.map((user, index) => (
-          <tr key={index}>
-            <td>{user.name.first}</td>
-            <td>{user.name.last}</td>
-            <td>{user.email}</td>
-            <td>{user.gender}</td>
-            <td>N/A</td>
-            <td>{user.location.city}</td>
-            <td>
-              <Link className="btn btn-warning btn-sm" to={`/user/${index}`}>Edit</Link>
-              {' '}
-              <Button color="danger" size="sm">Delete</Button>
-            </td>
+class UsersListComponent extends React.Component {
+
+  clickPage = (page) => (e) => {
+    e.preventDefault();
+    this.props.getPage(page, 10, this.props.filters, this.props.sorts);
+  };
+
+  render() {
+
+    return (
+      <div className="users-list-component">
+        <table className="table">
+          <thead>
+          <tr>
+            <th>
+              First
+              <Sort field="first" values={this.props.sorts} sort={this.props.sort} />
+            </th>
+            <th>
+              Last
+              <Sort field="last" values={this.props.sorts} sort={this.props.sort} />
+            </th>
+            <th>
+              Email
+              <Sort field="email" values={this.props.sorts} sort={this.props.sort} />
+            </th>
+            <th>
+              Gender
+              <Sort field="gender" values={this.props.sorts} sort={this.props.sort} />
+            </th>
+            <th>Age</th>
+            <th>
+              City
+              <Sort field="city" values={this.props.sorts} sort={this.props.sort} />
+            </th>
+            <th>Actions</th>
           </tr>
-        ))
-      }
-      </tbody>
-    </table>
+          </thead>
+          <tbody>
+          {
+            this.props.list.map((user, index) => (
+              <tr key={index}>
+                <td>{user.name.first}</td>
+                <td>{user.name.last}</td>
+                <td>{user.email}</td>
+                <td>{user.gender}</td>
+                <td>N/A</td>
+                <td>{user.location.city}</td>
+                <td>
+                  <Link className="btn btn-warning btn-sm" to={`/user/${index}`}>Edit</Link>
+                  {' '}
+                  <Button color="danger" size="sm">Delete</Button>
+                </td>
+              </tr>
+            ))
+          }
+          </tbody>
+        </table>
 
-    <Pagination size='sm'>
-      {
-        (props.page > 1) ? (
+        <Pagination size='sm'>
+          {
+            (this.props.page > 1) ? (
+              <PaginationItem>
+                <PaginationLink previous href="#" onClick={this.clickPage(this.props.page-1)} />
+              </PaginationItem>
+            ) : ''
+          }
           <PaginationItem>
-            <PaginationLink previous onClick={() => {props.getPage(props.page-1) }} />
+            <PaginationLink>
+              {this.props.page}
+            </PaginationLink>
           </PaginationItem>
-        ) : ''
-      }
-      <PaginationItem>
-        <PaginationLink>
-          {props.page}
-        </PaginationLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PaginationLink next onClick={() => {props.getPage(props.page+1) }} />
-      </PaginationItem>
-    </Pagination>
+          <PaginationItem>
+            <PaginationLink next href="#" onClick={this.clickPage(this.props.page+1)} />
+          </PaginationItem>
+        </Pagination>
 
-  </div>
-);
+      </div>
+    );
+
+  }
+}
 
 UsersListComponent.defaultProps = {
   list: [],
+  sorts: {},
+  filters: {},
   page: 1,
-  getPage: () => {}
+  getPage: (page, size, filters, sorts) => {},
+  sort: (field, value) => {}
 };
 
 UsersListComponent.propTypes = {
@@ -81,7 +112,10 @@ UsersListComponent.propTypes = {
     gender: PropTypes.string.isRequired
   })),
   page: PropTypes.number.isRequired,
-  getPage: PropTypes.func
+  sorts: PropTypes.object,
+  filters: PropTypes.object,
+  getPage: PropTypes.func,
+  sort: PropTypes.func
 };
 
 export default UsersListComponent
