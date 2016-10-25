@@ -11,6 +11,11 @@ class UsersListComponent extends React.Component {
     this.props.getPage(page, 10, this.props.filters, this.props.sorts);
   };
 
+  deleteUser = (index) => (e) => {
+    e.preventDefault();
+    this.props.deleteUser(index);
+  };
+
   render() {
 
     return (
@@ -55,7 +60,7 @@ class UsersListComponent extends React.Component {
                 <td>
                   <Link className="btn btn-warning btn-sm" to={`/user/${index}`}>Edit</Link>
                   {' '}
-                  <Button color="danger" size="sm">Delete</Button>
+                  <Button color="danger" size="sm" onClick={this.deleteUser(index)}>Delete</Button>
                 </td>
               </tr>
             ))
@@ -93,7 +98,8 @@ UsersListComponent.defaultProps = {
   filters: {},
   page: 1,
   getPage: (page, size, filters, sorts) => {},
-  sort: (field, value) => {}
+  sort: (field, value) => {},
+  deleteUser: (index) => {}
 };
 
 UsersListComponent.propTypes = {
@@ -115,7 +121,8 @@ UsersListComponent.propTypes = {
   sorts: PropTypes.object,
   filters: PropTypes.object,
   getPage: PropTypes.func,
-  sort: PropTypes.func
+  sort: PropTypes.func,
+  deleteUser: PropTypes.func
 };
 
 export default UsersListComponent

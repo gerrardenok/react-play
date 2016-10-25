@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import UsersList from '../components/UsersList';
-import {fetchUsers, setUsersSort} from '../actions/users';
+import {fetchUsers, setUsersSort, deleteUser} from '../actions/users';
 
 class UsersPageContainer extends React.Component {
 
@@ -20,6 +20,7 @@ class UsersPageContainer extends React.Component {
           sorts={this.props.users.sorts}
           filters={this.props.users.filters}
           sort={this.props.sort}
+          deleteUser={this.props.deleteUser}
         />
       );
     else
@@ -33,7 +34,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchUsers: (page) => dispatch(fetchUsers(page)),
-  sort: (field, value) => dispatch(setUsersSort(field, value))
+  sort: (field, value) => dispatch(setUsersSort(field, value)),
+  deleteUser: (index) => dispatch(deleteUser(index))
 });
 
 

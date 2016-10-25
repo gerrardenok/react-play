@@ -1,4 +1,4 @@
-import {USERS_FETCH_REQUEST, USERS_FETCH_SUCCESS, USERS_FETCH_FAILURE, SET_USERS_SORT} from '../actionTypes';
+import {USERS_FETCH_REQUEST, USERS_FETCH_SUCCESS, USERS_FETCH_FAILURE, SET_USERS_SORT, DELETE_USER} from '../actionTypes';
 import fetch from 'isomorphic-fetch'
 
 export function usersFetchRequest(page, limit) {
@@ -28,6 +28,13 @@ export function setUsersSort(field, value) {
     type: SET_USERS_SORT,
     field,
     value
+  }
+}
+
+export function deleteUser(index) {
+  return {
+    type: DELETE_USER,
+    id: index
   }
 }
 
