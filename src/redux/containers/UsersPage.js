@@ -7,8 +7,26 @@ class UsersPageContainer extends React.Component {
 
   componentDidMount() {
     if (!this.props.users.list)
-      this.props.fetchUsers();
+      this.getPage();
   }
+
+  deleteUser = (index) => {
+    let {dispatch} = this.props;
+    dispatch(deleteUser(index))
+  };
+
+  getPage = (page) => {
+    let {dispatch} = this.props;
+    dispatch(fetchUsers(page, this.props.users.filters, this.props.users.sorts));
+  };
+
+  setSort = (field, value) => {
+    let {dispatch} = this.props;
+    dispatch(setUsersSort(field, value));
+    setTimeout(()=>{ //JS_FIXME: Seems dirty hack
+      this.getPage(this.props.users.page);
+    });
+  };
 
   render() {
     if (!this.props.users.isFetch)
@@ -16,11 +34,11 @@ class UsersPageContainer extends React.Component {
         <UsersList
           list={this.props.users.list}
           page={this.props.users.page}
-          getPage={this.props.fetchUsers}
+          getPage={this.getPage}
           sorts={this.props.users.sorts}
           filters={this.props.users.filters}
-          sort={this.props.sort}
-          deleteUser={this.props.deleteUser}
+          sort={this.setSort}
+          deleteUser={this.deleteUser}
         />
       );
     else
@@ -32,11 +50,4 @@ const mapStateToProps = (state) => ({
   users: state.users
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchUsers: (page) => dispatch(fetchUsers(page)),
-  sort: (field, value) => dispatch(setUsersSort(field, value)),
-  deleteUser: (index) => dispatch(deleteUser(index))
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersPageContainer);
+export default connect(mapStateToProps)(UsersPageContainer);

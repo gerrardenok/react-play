@@ -8,7 +8,7 @@ class UsersListComponent extends React.Component {
 
   clickPage = (page) => (e) => {
     e.preventDefault();
-    this.props.getPage(page, 10, this.props.filters, this.props.sorts);
+    this.props.getPage(page);
   };
 
   deleteUser = (index) => (e) => {
@@ -97,7 +97,7 @@ UsersListComponent.defaultProps = {
   sorts: {},
   filters: {},
   page: 1,
-  getPage: (page, size, filters, sorts) => {},
+  getPage: (page) => {},
   sort: (field, value) => {},
   deleteUser: (index) => {}
 };
