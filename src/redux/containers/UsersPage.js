@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import UsersList from '../components/UsersList';
-import {fetchUsers, setUsersSort, deleteUser} from '../actions/users';
+import {fetchUsers, setUsersSort, deleteUser, setUsersFilters} from '../actions/users';
 
 class UsersPageContainer extends React.Component {
 
@@ -28,6 +28,14 @@ class UsersPageContainer extends React.Component {
     });
   };
 
+  setFilters = (filters) => {
+    let {dispatch} = this.props;
+    dispatch(setUsersFilters(filters));
+    setTimeout(()=>{ //JS_FIXME: Seems dirty hack
+      this.getPage(this.props.users.page);
+    });
+  };
+
   render() {
     if (!this.props.users.isFetch)
       return (
@@ -36,8 +44,9 @@ class UsersPageContainer extends React.Component {
           page={this.props.users.page}
           getPage={this.getPage}
           sorts={this.props.users.sorts}
+          setSort={this.setSort}
           filters={this.props.users.filters}
-          sort={this.setSort}
+          setFilters={this.setFilters}
           deleteUser={this.deleteUser}
         />
       );
@@ -45,6 +54,10 @@ class UsersPageContainer extends React.Component {
       return (<div className="loader">Loading...</div>)
   }
 }
+
+UsersPageContainer.defaultProps = {
+  users: {}
+};
 
 const mapStateToProps = (state) => ({
   users: state.users

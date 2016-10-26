@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {Pagination, PaginationItem, PaginationLink, Button } from 'reactstrap';
 import Sort from './Sort';
+import FiltersForm from '../components/FiltersForm';
 
 
 class UsersListComponent extends React.Component {
@@ -20,29 +21,30 @@ class UsersListComponent extends React.Component {
 
     return (
       <div className="users-list-component">
+        <FiltersForm setFilters={this.props.setFilters} />
         <table className="table">
           <thead>
           <tr>
             <th>
               First
-              <Sort field="first" values={this.props.sorts} sort={this.props.sort} />
+              <Sort field="first" values={this.props.sorts} sort={this.props.setSort} />
             </th>
             <th>
               Last
-              <Sort field="last" values={this.props.sorts} sort={this.props.sort} />
+              <Sort field="last" values={this.props.sorts} sort={this.props.setSort} />
             </th>
             <th>
               Email
-              <Sort field="email" values={this.props.sorts} sort={this.props.sort} />
+              <Sort field="email" values={this.props.sorts} sort={this.props.setSort} />
             </th>
             <th>
               Gender
-              <Sort field="gender" values={this.props.sorts} sort={this.props.sort} />
+              <Sort field="gender" values={this.props.sorts} sort={this.props.setSort} />
             </th>
             <th>Age</th>
             <th>
               City
-              <Sort field="city" values={this.props.sorts} sort={this.props.sort} />
+              <Sort field="city" values={this.props.sorts} sort={this.props.setSort} />
             </th>
             <th>Actions</th>
           </tr>
@@ -96,10 +98,7 @@ UsersListComponent.defaultProps = {
   list: [],
   sorts: {},
   filters: {},
-  page: 1,
-  getPage: (page) => {},
-  sort: (field, value) => {},
-  deleteUser: (index) => {}
+  page: 1
 };
 
 UsersListComponent.propTypes = {
@@ -118,10 +117,11 @@ UsersListComponent.propTypes = {
     gender: PropTypes.string.isRequired
   })),
   page: PropTypes.number.isRequired,
-  sorts: PropTypes.object,
-  filters: PropTypes.object,
   getPage: PropTypes.func,
-  sort: PropTypes.func,
+  filters: PropTypes.object,
+  setFilters: PropTypes.func,
+  sorts: PropTypes.object,
+  setSort: PropTypes.func,
   deleteUser: PropTypes.func
 };
 

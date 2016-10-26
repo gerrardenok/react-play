@@ -20,7 +20,11 @@ class SortComponent extends React.Component {
         inner = (<i className="fa fa-angle-double-down" onClick={this.sortAsc}>{''}</i>);
     }
     return (
-      <span className="sort-ctrl float-xs-right">{inner}</span>
+      <span className="sort-ctrl">
+        {' '}
+        {inner}
+        {' '}
+      </span>
     )
   }
 }

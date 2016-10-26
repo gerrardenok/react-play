@@ -15,3 +15,15 @@ $fa-font-path: "~font-awesome/fonts";
 .sort-ctrl {
   cursor: pointer;
 }
+
+.users-filters-search-btn, .users-filters-reset-btn {
+  width: 49%;
+}
+
+.users-filters-search-btn {
+  float: left;
+}
+
+.users-filters-reset-btn {
+  float: right;
+}
