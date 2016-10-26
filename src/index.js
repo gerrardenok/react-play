@@ -4,8 +4,8 @@ require('styles/App.scss');
 import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './redux/containers/Root';
-import configureStore from './redux/configureStore'
+import Root from './scripts/containers/Root';
+import configureStore from './scripts/configureStore'
 
 // app init
 let store = configureStore();
