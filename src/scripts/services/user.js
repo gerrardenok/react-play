@@ -25,9 +25,20 @@ export function findById(id) {
   });
 }
 
-/**
- * Load users list
- * */
+export function update(user) {
+  return fetchAll().then(()=> {
+    for(let i=0; i<USERS_STORAGE.length; i++) {
+      let u = USERS_STORAGE[i];
+      if (u.uid == user.uid) {
+        USERS_STORAGE[i] = user;
+      }
+    }
+    return user;
+  });
+}
+
+
+
 function fetchAll(limit = 30) {
   if (USERS_STORAGE) return Promise.resolve(USERS_STORAGE);
   return fetch(`https://randomuser.me/api/?&results=${limit}&seed=abc`)
@@ -45,18 +56,6 @@ function fetchAll(limit = 30) {
     });
 }
 
-/**
- * Exclude deleted
- * */
-function exclude(users, excluded) {
-  return users.filter((u)=>{
-    return !excluded.includes(u.uid);
-  })
-}
-
-/**
- * Apply sorts to users list
- * */
 function sort(users, sorts) {
   const dynamicSort = (propertyGetter, order) => {
     let sortOrder = (order == 'desc') ? -1 : 1;
@@ -92,10 +91,6 @@ function sort(users, sorts) {
   return users;
 }
 
-
-/**
- * Apply filters to users list
- * */
 function filter(users, filters) {
   const dynamicFilter = (propertyGetter, value) => (user) => {
     let property = propertyGetter(user);
@@ -134,9 +129,6 @@ function filter(users, filters) {
   return filtered;
 }
 
-/**
- * Apply paging for users list
- * */
 function combinePage(users, page = 1, pageSize = 10) {
   let offset = (page - 1) * pageSize,
     limit = offset + pageSize;

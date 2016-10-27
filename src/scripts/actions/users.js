@@ -1,5 +1,5 @@
 import {FETCH_USERS, REQUEST_FETCH_USERS, DELETE_USER} from '../actionTypes';
-import {find, deleteById} from '../services/userSerivce';
+import {find, deleteById} from '../services/user';
 
 export const fetchUsers = (page = 1, filters = {}, sorts = {}, pageSize = 10) => (dispatch) => {
   dispatch(requestFetchUsers());

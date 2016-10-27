@@ -1,5 +1,7 @@
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
+@import "../../node_modules/bootstrap/scss/variables.scss";
+@import "../../node_modules/bootstrap/scss/mixins.scss";
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "loader.css";
 
@@ -26,4 +28,23 @@ $fa-font-path: "~font-awesome/fonts";
 
 .users-filters-reset-btn {
   float: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.auth-error-msg {
+  text-align: center;
+  color: $brand-danger;
+}
+
+.logged-user-section {
+  .full-name {
+    margin: 0 5px;
+    font-weight: bold;
+  }
+  .rounded-circle {
+    @include size(35px);
+  }
 }

@@ -60,5 +60,5 @@ class FiltersFormComponent extends Component {
 }
 
 export default reduxForm({
-  form: 'UserFiltersForm'
+  form: 'UsersFiltersForm'
 })(FiltersFormComponent);

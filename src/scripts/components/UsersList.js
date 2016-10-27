@@ -8,11 +8,6 @@ import Paginator from '../components/Paginator';
 
 class UsersListComponent extends React.Component {
 
-  handlePageSelect = (page) => (e) => {
-    e.preventDefault();
-    this.props.onPageSelect(page);
-  };
-
   handleDeleteUser = (index) => (e) => {
     e.preventDefault();
     this.props.onDeleteUser(index);
@@ -29,6 +24,7 @@ class UsersListComponent extends React.Component {
 
   static propTypes = {
     isFetch: PropTypes.bool,
+    isReadOnly: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.shape({
       uid: PropTypes.number.isRequired,
       id: PropTypes.shape({
@@ -92,7 +88,7 @@ class UsersListComponent extends React.Component {
           </thead>
           <tbody>
           {
-            this.props.list.map((user) => (
+            (this.props.list.length) ? this.props.list.map((user) => (
               <tr key={user.uid}>
                 <td>{user.name.first}</td>
                 <td>{user.name.last}</td>
@@ -108,7 +104,9 @@ class UsersListComponent extends React.Component {
                   <Button color="danger" size="sm" onClick={this.handleDeleteUser(user.uid)}>Delete</Button>
                 </td>
               </tr>
-            ))
+            )) : (
+              <tr><td colSpan="7" className="text-center">Nothing found.</td></tr>
+            )
           }
           </tbody>
         </table>

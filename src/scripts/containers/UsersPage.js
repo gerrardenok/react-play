@@ -3,29 +3,35 @@ import {connect} from 'react-redux';
 import UsersList from '../components/UsersList';
 import {fetchUsers, deleteUser} from '../actions/users';
 
+const mapStateToProps = (state) => ({
+  users: state.users,
+  isReadOnly: !state.auth.user
+});
+
+@connect(mapStateToProps)
 class UsersPageContainer extends React.Component {
 
   handleDeleteUser = (id) => {
-    let {dispatch} = this.props;
+    let {dispatch, users} = this.props;
     dispatch(deleteUser(id));
     setTimeout(()=>{ // TODO: find reason and refactoring
-      dispatch(fetchUsers(this.props.users.page, this.props.users.filters, this.props.users.sorts));
+      dispatch(fetchUsers(users.page, users.filters, users.sorts));
     });
   };
 
   handlePageSelect = (page) => {
-    let {dispatch} = this.props;
-    dispatch(fetchUsers(page, this.props.users.filters, this.props.users.sorts));
+    let {dispatch, users} = this.props;
+    dispatch(fetchUsers(page, users.filters, users.sorts));
   };
 
   handleSort = (field, value) => {
-    let {dispatch} = this.props;
-    dispatch(fetchUsers(this.props.users.page, this.props.users.filters, {[field]: value}));
+    let {dispatch, users} = this.props;
+    dispatch(fetchUsers(users.page, users.filters, {[field]: value}));
   };
 
   handleFilters = (filters) => {
-    let {dispatch} = this.props;
-    dispatch(fetchUsers(this.props.users.page, filters, this.props.users.sorts));
+    let {dispatch, users} = this.props;
+    dispatch(fetchUsers(users.page, filters, users.sorts));
   };
 
   static defaultProps = {
@@ -38,17 +44,19 @@ class UsersPageContainer extends React.Component {
   }
 
   render() {
+    let {users, isReadOnly} = this.props;
     return (
       <UsersList
-        isFetch={this.props.users.isFetch}
-        list={this.props.users.list}
-        page={this.props.users.page}
-        pageSize={this.props.users.pageSize}
-        total={this.props.users.total}
+        isFetch={users.isFetch}
+        isReadOnly={isReadOnly}
+        list={users.list}
+        page={users.page}
+        pageSize={users.pageSize}
+        total={users.total}
         onPageSelect={this.handlePageSelect}
-        sorts={this.props.users.sorts}
+        sorts={users.sorts}
         onSort={this.handleSort}
-        filters={this.props.users.filters}
+        filters={users.filters}
         onFilters={this.handleFilters}
         onDeleteUser={this.handleDeleteUser}
       />
@@ -56,8 +64,6 @@ class UsersPageContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  users: state.users
-});
 
-export default connect(mapStateToProps)(UsersPageContainer);
+
+export default UsersPageContainer;
