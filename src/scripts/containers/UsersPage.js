@@ -8,7 +8,9 @@ class UsersPageContainer extends React.Component {
   handleDeleteUser = (id) => {
     let {dispatch} = this.props;
     dispatch(deleteUser(id));
-    dispatch(fetchUsers(this.props.users.page, this.props.users.filters, this.props.users.sorts));
+    setTimeout(()=>{ // TODO: find reason and refactoring
+      dispatch(fetchUsers(this.props.users.page, this.props.users.filters, this.props.users.sorts));
+    });
   };
 
   handlePageSelect = (page) => {
@@ -41,6 +43,8 @@ class UsersPageContainer extends React.Component {
         isFetch={this.props.users.isFetch}
         list={this.props.users.list}
         page={this.props.users.page}
+        pageSize={this.props.users.pageSize}
+        total={this.props.users.total}
         onPageSelect={this.handlePageSelect}
         sorts={this.props.users.sorts}
         onSort={this.handleSort}

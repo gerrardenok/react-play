@@ -1,12 +1,10 @@
 import fetch from 'isomorphic-fetch'
 
-let FETCH_USERS_PROMISE = null;
-let EXCLUDED_USERS = [];
+let USERS_STORAGE = null;
 
 export function find(page = 1, filters = {}, sorts = {}, pageSize = 10) {
   return fetchAll().then((users) => {
-    let excluded = exclude(users, EXCLUDED_USERS),
-      sorted = sort(excluded, sorts),
+    let sorted = sort(users, sorts),
       filtered = filter(sorted, filters),
       paged = combinePage(filtered, page, pageSize);
     paged.query = {page, filters, sorts, pageSize};
@@ -15,8 +13,8 @@ export function find(page = 1, filters = {}, sorts = {}, pageSize = 10) {
 }
 
 export function deleteById(id) {
-  return Promise.resolve(true).then(()=> {
-    EXCLUDED_USERS.push(id);
+  return fetchAll().then(()=> {
+    USERS_STORAGE = USERS_STORAGE.filter((u)=>(u.uid != id));
     return {id};
   });
 }
@@ -30,17 +28,21 @@ export function findById(id) {
 /**
  * Load users list
  * */
-function fetchAll(limit = 100) {
-  if (FETCH_USERS_PROMISE) return FETCH_USERS_PROMISE;
-  FETCH_USERS_PROMISE = fetch(`https://randomuser.me/api/?&results=${limit}&seed=abc`)
+function fetchAll(limit = 30) {
+  if (USERS_STORAGE) return Promise.resolve(USERS_STORAGE);
+  return fetch(`https://randomuser.me/api/?&results=${limit}&seed=abc`)
     .then(response => response.json())
     .then(json => {
-      return json.results.map((u, index)=> {
+      let users = json.results.map((u, index)=> {
         u.uid = index + 1;
         return u;
-      })
+      }).map((u) => {
+        u.age = randomIntFromInterval(20, 60);
+        return u;
+      });
+      USERS_STORAGE = users;
+      return users;
     });
-  return FETCH_USERS_PROMISE;
 }
 
 /**
@@ -74,16 +76,12 @@ function sort(users, sorts) {
         users.sort(dynamicSort((user) => (user.name.last), sorts[key]));
         break;
 
-      case 'email':
-        users.sort(dynamicSort((user) => (user.email), sorts[key]));
-        break;
-
-      case 'gender':
-        users.sort(dynamicSort((user) => (user.gender), sorts[key]));
-        break;
-
       case 'city':
         users.sort(dynamicSort((user) => (user.location.city), sorts[key]));
+        break;
+
+      case 'age':
+        users.sort(dynamicSort((user) => (user.age), sorts[key]));
         break;
 
       default:
@@ -120,6 +118,10 @@ function filter(users, filters) {
         filtered = filtered.filter(dynamicFilter((user) => (user.email), filters[key]));
         break;
 
+      case 'gender':
+        filtered = filtered.filter(dynamicFilter((user) => (user.gender), filters[key]));
+        break;
+
       case 'city':
         filtered = filtered.filter(dynamicFilter((user) => (user.location.city), filters[key]));
         break;
@@ -146,4 +148,9 @@ function combinePage(users, page = 1, pageSize = 10) {
     results,
     total: users.length
   }
+}
+
+function randomIntFromInterval(min,max)
+{
+  return Math.floor(Math.random()*(max-min+1)+min);
 }
