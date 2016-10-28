@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {UserIsAuthenticated} from '../services/security';
 
 const mapStateToProps = (state) => ({
   state: state
 });
 
+@UserIsAuthenticated
 @connect(mapStateToProps)
-class UserPageContainer extends Component {
+class UserEditPageContainer extends Component {
 
   static defaultProps = {};
 
@@ -16,9 +18,9 @@ class UserPageContainer extends Component {
 
   render() {
     return (
-      <h2>User view page</h2>
+      <h2>User edit page</h2>
     );
   }
 }
 
-export default UserPageContainer;
+export default UserEditPageContainer;

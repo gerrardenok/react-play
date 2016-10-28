@@ -20,11 +20,11 @@ class FiltersFormComponent extends Component {
       handleReset = (e) => {
         reset();
         setTimeout(()=>{ // TODO: Refactoring see https://github.com/erikras/redux-form/issues/202
-          window.document.querySelector('[type="submit').click();
+          window.document.getElementById('apply-users-filters-btn').click();
         });
       };
     return (
-      <form onSubmit={handleFilters}>
+      <form className="row" onSubmit={handleFilters}>
         <Col md={4}>
           <FormGroup>
             <Field name="first" component="input" type="text" className="form-control" placeholder="First name"/>
@@ -50,7 +50,7 @@ class FiltersFormComponent extends Component {
             <Field name="city" component="input" type="text" className="form-control" placeholder="City"/>
           </FormGroup>
           <FormGroup>
-            <Button className="users-filters-search-btn" color="primary" type="submit">Search</Button>
+            <Button id="apply-users-filters-btn" className="users-filters-search-btn" color="primary" type="submit">Search</Button>
             <Button className="users-filters-reset-btn" type="reset" onClick={handleReset}>Reset</Button>
           </FormGroup>
         </Col>

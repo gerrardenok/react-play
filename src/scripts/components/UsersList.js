@@ -54,6 +54,12 @@ class UsersListComponent extends React.Component {
 
   render() {
 
+    let {
+      isFetch, isReadOnly,
+      list, page, pageSize, total, onPageSelect,
+      sorts, onSort, onFilters
+    } = this.props;
+
     let loader = (<div className="loader">Loading...</div>);
 
     let listView = (
@@ -63,11 +69,11 @@ class UsersListComponent extends React.Component {
           <tr>
             <th>
               First
-              <Sort field="first" values={this.props.sorts} onSort={this.props.onSort}/>
+              <Sort field="first" values={sorts} onSort={onSort}/>
             </th>
             <th>
               Last
-              <Sort field="last" values={this.props.sorts} onSort={this.props.onSort}/>
+              <Sort field="last" values={sorts} onSort={onSort}/>
             </th>
             <th>
               Email
@@ -77,18 +83,18 @@ class UsersListComponent extends React.Component {
             </th>
             <th>
               Age
-              <Sort field="age" values={this.props.sorts} onSort={this.props.onSort}/>
+              <Sort field="age" values={sorts} onSort={onSort}/>
             </th>
             <th>
               City
-              <Sort field="city" values={this.props.sorts} onSort={this.props.onSort}/>
+              <Sort field="city" values={sorts} onSort={onSort}/>
             </th>
             <th>Actions</th>
           </tr>
           </thead>
           <tbody>
           {
-            (this.props.list.length) ? this.props.list.map((user) => (
+            (list.length) ? list.map((user) => (
               <tr key={user.uid}>
                 <td>{user.name.first}</td>
                 <td>{user.name.last}</td>
@@ -98,31 +104,39 @@ class UsersListComponent extends React.Component {
                 <td>{user.location.city}</td>
                 <td>
                   <Link className="btn btn-info btn-sm" to={`/user/${user.uid}`}>View</Link>
-                  {' '}
-                  <Link className="btn btn-warning btn-sm" to={`/user/${user.uid}/edit`}>Edit</Link>
-                  {' '}
-                  <Button color="danger" size="sm" onClick={this.handleDeleteUser(user.uid)}>Delete</Button>
+                  {
+                    (!isReadOnly) ? (
+                      <span>
+                        {' '}
+                        <Link className="btn btn-warning btn-sm" to={`/user/${user.uid}/edit`}>Edit</Link>
+                        {' '}
+                        <Button color="danger" size="sm" onClick={this.handleDeleteUser(user.uid)}>Delete</Button>
+                      </span>
+                    ) : ''
+                  }
                 </td>
               </tr>
             )) : (
-              <tr><td colSpan="7" className="text-center">Nothing found.</td></tr>
+              <tr>
+                <td colSpan="7" className="text-center">Nothing found.</td>
+              </tr>
             )
           }
           </tbody>
         </table>
         <Paginator
-          page={this.props.page}
-          pageSize={this.props.pageSize}
-          total={this.props.total}
-          onPageSelect={this.props.onPageSelect}
+          page={page}
+          pageSize={pageSize}
+          total={total}
+          onPageSelect={onPageSelect}
         />
       </div>
     );
 
     return (
       <div className="users-list-component">
-        <FiltersForm onFilters={this.props.onFilters}/>
-        {(this.props.isFetch) ? loader : listView}
+        <FiltersForm onFilters={onFilters}/>
+        {(isFetch) ? loader : listView}
       </div>
     );
 

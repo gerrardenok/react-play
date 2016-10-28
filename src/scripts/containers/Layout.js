@@ -1,20 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import Header from './Header'
 
-const LayoutContainer = (props) => (
-  <div>
-    <Header />
-    <section className="container">
-      <div className="row">
-        <div className="col-md-12">
-          {props.children}
-        </div>
+@connect()
+class LayoutContainer extends Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <section className="container">
+          <div className="row">
+            <div className="col-md-12">
+              {this.props.children}
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  </div>
-);
+    );
+  }
+}
 
-LayoutContainer.defaultProps = {};
-
-export default connect()(LayoutContainer);
+export default LayoutContainer;

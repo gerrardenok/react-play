@@ -5,6 +5,9 @@ import Layout from './Layout';
 import HomePage from './HomePage';
 import UsersPage from './UsersPage';
 import UserPage from './UserPage';
+import ForbiddenPage from './ForbiddenPage';
+import NotFoundPage from './NotFoundPage';
+import UserEditPage from './UserEditPage';
 import {syncHistoryWithStore} from 'react-router-redux';
 
 const RootContainer = ({ store }) => (
@@ -14,6 +17,9 @@ const RootContainer = ({ store }) => (
         <IndexRoute component={HomePage} />
         <Route path="/users" component={UsersPage} />
         <Route path="/user/:userId" component={UserPage} />
+        <Route path="/user/:userId/edit" component={UserEditPage} />
+        <Route path="/forbidden" component={ForbiddenPage} />
+        <Route path="*" component={NotFoundPage} />
       </Route>
     </Router>
   </Provider>
