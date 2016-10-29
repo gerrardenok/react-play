@@ -40,11 +40,6 @@ class UsersPageContainer extends React.Component {
     users: {}
   };
 
-  componentDidMount() {
-    if (!this.props.users.list)
-      this.handlePageSelect();
-  }
-
   render() {
     let {users, isReadOnly} = this.props;
     return (

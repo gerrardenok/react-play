@@ -1,7 +1,7 @@
 import {SIGN_OUT, SIGN_IN} from '../actionTypes';
 import * as authService from '../services/auth';
 
-export default function (state = {user: authService.getLoggedIn()}, action) {
+export default function (state = {user: authService.getLoggedIn()}, action) { // TODO: refactoring of dirty hacks
   switch (action.type) {
     case SIGN_IN: {
       if(action.error)

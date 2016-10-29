@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchUser, deleteUser} from '../actions/user';
+import {fetchUser, deleteUser, updateUser} from '../actions/user';
 import {fetchUsers} from '../actions/users';
 import UserCard from '../components/UserCard';
 import UserNotFound from '../components/UserNotFound';
@@ -17,20 +17,18 @@ const mapStateToProps = (state) => ({
 @connect(mapStateToProps)
 class UserPageContainer extends Component {
 
-  componentDidMount() {
-    let {dispatch, params: { userId }} = this.props;
-    dispatch(fetchUser(parseInt(userId)));
-  }
-
   handleDeleteUser = (id) => {
     let {dispatch, users} = this.props;
     dispatch(deleteUser(id));
     dispatch(push('/users'));
-    dispatch(push('/users'));
-    setTimeout(() => { // TODO: refactoring
-      dispatch(fetchUsers());
-    },100);
   };
+
+  handleUpdateUser = (user) => {
+    let {dispatch, users} = this.props;
+    dispatch(updateUser(user));
+    dispatch(push(`/user/${user.uid}`));
+  };
+
 
   render() {
     let {user: {profile, isFetch, error}, isReadOnly} = this.props;

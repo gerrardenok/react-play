@@ -15,11 +15,6 @@ const mapStateToProps = (state) => ({
 @connect(mapStateToProps)
 class UserEditPageContainer extends Component {
 
-  componentDidMount() {
-    let {dispatch, params: { userId }} = this.props;
-    dispatch(fetchUser(parseInt(userId)));
-  }
-
   render() {
     let {user: {profile, isFetch, error}} = this.props;
     profile = profile || {};
