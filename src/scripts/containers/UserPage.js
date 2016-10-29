@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchUser, deleteUser, updateUser} from '../actions/user';
-import {fetchUsers} from '../actions/users';
+import {deleteUser} from '../actions/user';
 import UserCard from '../components/UserCard';
 import UserNotFound from '../components/UserNotFound';
 import Loader from '../components/Loader';
@@ -22,13 +21,6 @@ class UserPageContainer extends Component {
     dispatch(deleteUser(id));
     dispatch(push('/users'));
   };
-
-  handleUpdateUser = (user) => {
-    let {dispatch, users} = this.props;
-    dispatch(updateUser(user));
-    dispatch(push(`/user/${user.uid}`));
-  };
-
 
   render() {
     let {user: {profile, isFetch, error}, isReadOnly} = this.props;

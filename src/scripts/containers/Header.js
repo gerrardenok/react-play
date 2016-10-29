@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Navbar, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap';
 import SignInForm from '../components/SignInForm';
 import * as authActions from '../actions/auth';
+import {Link} from 'react-router';
 
 const mapStateToProps = (state) => {
   return {
@@ -46,7 +47,7 @@ class HeaderContainer extends Component {
     return (
       <section className="container">
         <Navbar color="faded" light>
-          <NavbarBrand href="/">React-play</NavbarBrand>
+          <Link className="navbar-brand" to={'/users'}>React-play</Link>
           <Nav navbar>
             <NavItem>
               <NavLink href="/docs/Task.pdf">Task</NavLink>

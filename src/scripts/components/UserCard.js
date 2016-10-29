@@ -8,6 +8,8 @@ const UserCardComponent = ({user, isReadOnly, onDeleteUser}) => {
       <Link className="btn btn-warning btn-md" to={`/user/${user.uid}/edit`}>Edit</Link>
       {' '}
       <Button color="danger" size="md" onClick={()=> {onDeleteUser(user.uid)}}>Delete</Button>
+      {' '}
+      <Link className="btn btn-secondary btn-md" to={'/users'}>View all</Link>
     </div>
   );
   return (
