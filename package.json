@@ -1,7 +1,7 @@
 {
   "name": "react-play",
   "private": true,
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "ES2015, React, Redux, D3 playground",
   "main": "",
   "scripts": {
