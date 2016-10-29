@@ -21,7 +21,13 @@ export function deleteById(id) {
 
 export function findById(id) {
   return fetchAll().then(function (users) {
-    return users.filter((u) => (u.uid == id))[0]
+    let user = users.filter((u) => (u.uid == id))[0];
+    if (user)
+      return Promise.resolve(user);
+    else
+      return Promise.reject({
+        message: 'User not found'
+      });
   });
 }
 
@@ -48,7 +54,7 @@ function fetchAll(limit = 30) {
         u.uid = index + 1;
         return u;
       }).map((u) => {
-        u.age = randomIntFromInterval(20, 60);
+        u.age = randomIntFromInterval(20, 40);
         return u;
       });
       USERS_STORAGE = users;

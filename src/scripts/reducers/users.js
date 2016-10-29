@@ -1,4 +1,4 @@
-import {REQUEST_FETCH_USERS, FETCH_USERS, DELETE_USER} from '../actionTypes';
+import {REQUEST_FETCH_USERS, FETCH_USERS} from '../actionTypes';
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -6,9 +6,6 @@ export default function(state = {}, action) {
       return {... state, isFetch: true};
     case FETCH_USERS:
       return fetchUsers(state, action);
-    case DELETE_USER: {
-      return state;
-    }
     default:
       return state;
   }

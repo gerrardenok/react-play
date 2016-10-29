@@ -4,7 +4,7 @@ require('styles/App.scss');
 import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './scripts/containers/Root';
+import Root from './scripts/Root';
 import configureStore from './scripts/configureStore'
 
 // app init

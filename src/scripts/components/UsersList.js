@@ -4,6 +4,7 @@ import Sort from './Sort';
 import FiltersForm from '../components/FiltersForm';
 import {Button} from 'reactstrap';
 import Paginator from '../components/Paginator';
+import Loader from '../components/Loader';
 
 
 class UsersListComponent extends React.Component {
@@ -60,7 +61,7 @@ class UsersListComponent extends React.Component {
       sorts, onSort, onFilters
     } = this.props;
 
-    let loader = (<div className="loader">Loading...</div>);
+    let loader = (<Loader />);
 
     let listView = (
       <div>
@@ -85,7 +86,7 @@ class UsersListComponent extends React.Component {
               Age
               <Sort field="age" values={sorts} onSort={onSort}/>
             </th>
-            <th>
+            <th className="text-capitalize">
               City
               <Sort field="city" values={sorts} onSort={onSort}/>
             </th>
@@ -96,12 +97,12 @@ class UsersListComponent extends React.Component {
           {
             (list.length) ? list.map((user) => (
               <tr key={user.uid}>
-                <td>{user.name.first}</td>
-                <td>{user.name.last}</td>
+                <td className="text-capitalize">{user.name.first}</td>
+                <td className="text-capitalize">{user.name.last}</td>
                 <td>{user.email}</td>
                 <td>{user.gender}</td>
                 <td>{user.age}</td>
-                <td>{user.location.city}</td>
+                <td className="text-capitalize">{user.location.city}</td>
                 <td>
                   <Link className="btn btn-info btn-sm" to={`/user/${user.uid}`}>View</Link>
                   {

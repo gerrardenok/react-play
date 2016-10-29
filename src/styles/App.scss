@@ -48,3 +48,12 @@ $fa-font-path: "~font-awesome/fonts";
     @include size(35px);
   }
 }
+
+.user-card {
+  padding: 20px 0;
+  font-size: 16px;
+
+  .actions-row {
+    padding: 10px 0;
+  }
+}

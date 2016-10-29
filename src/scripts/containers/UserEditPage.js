@@ -1,24 +1,40 @@
+import {UserIsAuthenticated} from '../services/security';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {UserIsAuthenticated} from '../services/security';
+import {fetchUser} from '../actions/user';
+import UserCard from '../components/UserCard';
+import UserNotFound from '../components/UserNotFound';
+import UserForm from '../components/UserForm';
+import Loader from '../components/Loader';
 
 const mapStateToProps = (state) => ({
-  state: state
+  user: state.user
 });
 
 @UserIsAuthenticated
 @connect(mapStateToProps)
 class UserEditPageContainer extends Component {
 
-  static defaultProps = {};
-
   componentDidMount() {
-    // load user
+    let {dispatch, params: { userId }} = this.props;
+    dispatch(fetchUser(parseInt(userId)));
   }
 
   render() {
+    let {user: {profile, isFetch, error}} = this.props;
+    profile = profile || {};
+
+    let loader = (<Loader />);
+    let view = (<UserForm user={profile} />);
+    let notFound = (<UserNotFound />);
+
     return (
-      <h2>User edit page</h2>
+      <div>
+        {
+          (error) ? notFound :
+            (isFetch) ? loader : view
+        }
+      </div>
     );
   }
 }

@@ -5,3 +5,7 @@ export const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth.user,
   failureRedirectPath: '/forbidden'
 });
+
+export const isReadOnly = (state) => {
+  return !state.auth.user;
+};

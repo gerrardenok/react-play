@@ -1,11 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import UsersList from '../components/UsersList';
-import {fetchUsers, deleteUser} from '../actions/users';
+import {fetchUsers} from '../actions/users';
+import {deleteUser} from '../actions/user';
+import {isReadOnly} from '../services/security';
 
 const mapStateToProps = (state) => ({
   users: state.users,
-  isReadOnly: !state.auth.user
+  isReadOnly: isReadOnly(state)
 });
 
 @connect(mapStateToProps)
@@ -31,7 +33,7 @@ class UsersPageContainer extends React.Component {
 
   handleFilters = (filters) => {
     let {dispatch, users} = this.props;
-    dispatch(fetchUsers(users.page, filters, users.sorts));
+    dispatch(fetchUsers(1, filters, users.sorts));
   };
 
   static defaultProps = {
