@@ -30,10 +30,12 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      actions: `${defaultSettings.srcPath}/actions/`,
-      components: `${defaultSettings.srcPath}/components/`,
-      sources: `${defaultSettings.srcPath}/sources/`,
-      stores: `${defaultSettings.srcPath}/stores/`,
+      actions: `${defaultSettings.srcPath}/scripts/actions/`,
+      components: `${defaultSettings.srcPath}/scripts/components/`,
+      containers: `${defaultSettings.srcPath}/scripts/containers/`,
+      middlewares: `${defaultSettings.srcPath}/scripts/middlewares/`,
+      reducers: `${defaultSettings.srcPath}/scripts/reducers/`,
+      services: `${defaultSettings.srcPath}/scripts/services/`,
       styles: `${defaultSettings.srcPath}/styles/`,
       config: `${defaultSettings.srcPath}/config/` + process.env.REACT_WEBPACK_ENV
     }

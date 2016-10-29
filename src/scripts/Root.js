@@ -16,7 +16,7 @@ import {fetchUser} from './actions/user';
 
 
 @connect()
-class RootContainer extends Component {
+class Root extends Component {
 
   render() {
     let { store } = this.props;
@@ -57,4 +57,4 @@ class RootContainer extends Component {
   };
 }
 
-export default RootContainer;
+export default Root;
