@@ -4,6 +4,7 @@ import {Router, IndexRoute, Route, browserHistory} from 'react-router';
 import Layout from './containers/Layout';
 import HomePage from './containers/HomePage';
 import UsersPage from './containers/UsersPage';
+import DashboardPage from './containers/DashboardPage';
 import UserPage from './containers/UserPage';
 import ForbiddenPage from './containers/ForbiddenPage';
 import NotFoundPage from './containers/NotFoundPage';
@@ -26,6 +27,7 @@ class Root extends Component {
           <Route path="/" component={Layout} >
             <IndexRoute component={HomePage} />
             <Route path="/users" onEnter={this.onUsersEnter} component={UsersPage} />
+            <Route path="/dashboard" onEnter={this.onUsersEnter} component={DashboardPage} />
             <Route path="/user/:userId" onEnter={this.onUserEnter} component={UserPage} />
             <Route path="/user/:userId/edit" onEnter={this.onUserEnter} component={UserIsAuthenticated(UserEditPage)} />
             <Route path="/forbidden" component={ForbiddenPage} />

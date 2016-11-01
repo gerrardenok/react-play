@@ -11,6 +11,8 @@ const JumbotronComponent = () => (
     </p>
     <p>
       <Link className="btn btn-lg btn-success" to="/users">Go to users list</Link>
+      {' '}
+      <Link className="btn btn-lg btn-info" to="/dashboard">Go to dashboard</Link>
     </p>
   </div>
 );
