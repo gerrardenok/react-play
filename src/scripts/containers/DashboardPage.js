@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import UsersBubbleChart from '../components/UsersBubbleChart';
+import UsersAgeChart from '../components/UsersAgeChart';
 
 
 const mapStateToProps = (state) => ({
@@ -11,10 +11,10 @@ const mapStateToProps = (state) => ({
 class UsersPageContainer extends React.Component {
 
   render() {
-    let {users, isReadOnly} = this.props;
+    let {users} = this.props;
     return (
       <div>
-        <UsersBubbleChart users={users.list} width={100} height={100}/>
+        <UsersAgeChart users={users.list} width={500} height={500}/>
       </div>
     )
   }
