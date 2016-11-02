@@ -27,7 +27,7 @@ class Root extends Component {
           <Route path="/" component={Layout} >
             <IndexRoute component={HomePage} />
             <Route path="/users" onEnter={this.onUsersEnter} component={UsersPage} />
-            <Route path="/dashboard" onEnter={this.onDashboardEnter} component={DashboardPage} />
+            <Route path="/dashboard" onEnter={this.onUsersEnter} component={DashboardPage} />
             <Route path="/user/:userId" onEnter={this.onUserEnter} component={UserPage} />
             <Route path="/user/:userId/edit" onEnter={this.onUserEnter} component={UserIsAuthenticated(UserEditPage)} />
             <Route path="/forbidden" component={ForbiddenPage} />
@@ -46,14 +46,6 @@ class Root extends Component {
     let {dispatch} = this.props;
     setTimeout(() => { // TODO: refactoring of dirty hacks
       dispatch(fetchUsers());
-    }, 100);
-    callback();
-  };
-
-  onDashboardEnter = (nextState, replace, callback) => {
-    let {dispatch} = this.props;
-    setTimeout(() => { // TODO: refactoring of dirty hacks
-      dispatch(fetchUsers(1,{},{},100));
     }, 100);
     callback();
   };
