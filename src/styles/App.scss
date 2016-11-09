@@ -66,16 +66,36 @@ $fa-font-path: "~font-awesome/fonts";
   cursor: pointer;
 }
 
-.users-bar-chart {
+.users-bar-chart, .users-line-chart {
   position: relative;
   height: 335px;
+}
 
+.users-bar-chart {
   rect {
     fill: steelblue;
   }
 
   rect:hover {
     fill: orange;
+  }
+}
+
+.users-line-chart {
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+  }
+
+  .line-point {
+    cursor: pointer;
+    fill: steelblue;
+    stroke: steelblue;
+
+    &:hover {
+      fill: orange;
+    }
   }
 }
 
