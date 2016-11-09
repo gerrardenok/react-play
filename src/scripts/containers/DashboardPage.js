@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {FormGroup, Col, Row, Button} from 'reactstrap';
 import {fetchUsers} from '../actions/users';
-import UsersAgeChart from '../components/UsersAgeChart';
+import UsersAgeBarChart from '../components/UsersAgeBarChart';
 
 
 const mapStateToProps = (state) => ({
@@ -33,7 +33,7 @@ class UsersPageContainer extends React.Component {
         <Row>
           <Col md={6}>
             <h2 className="text-center">Users by Age</h2>
-            <UsersAgeChart users={users.list} width={500} height={300}/>
+            <UsersAgeBarChart users={users.list}/>
           </Col>
         </Row>
       </div>
