@@ -66,13 +66,14 @@ $fa-font-path: "~font-awesome/fonts";
   cursor: pointer;
 }
 
-.users-bar-chart, .users-line-chart {
+.users-bar-chart, .users-line-chart, .users-pie-chart {
   position: relative;
   height: 335px;
 }
 
 .users-bar-chart {
   rect {
+    cursor: pointer;
     fill: steelblue;
   }
 
@@ -99,6 +100,18 @@ $fa-font-path: "~font-awesome/fonts";
   }
 }
 
+.users-pie-chart {
+  margin-top: 20px;
+
+  .arc path {
+    cursor: pointer;
+
+    &:hover {
+      fill: orange !important;
+    }
+  }
+}
+
 .d3-tooltip {
   position: absolute;
   z-index: 10;
@@ -107,6 +120,7 @@ $fa-font-path: "~font-awesome/fonts";
   height: 34px;
   padding: 2px;
   font: 12px sans-serif;
+  overflow: hidden;
   background: lightsteelblue;
   border: 0;
   border-radius: 8px;

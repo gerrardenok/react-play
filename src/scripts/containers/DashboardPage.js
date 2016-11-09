@@ -4,6 +4,7 @@ import {FormGroup, Col, Row, Button} from 'reactstrap';
 import {fetchUsers} from '../actions/users';
 import UsersAgeBarChart from '../components/UsersAgeBarChart';
 import UsersAgeLineChart from '../components/UsersAgeLineChart';
+import UsersAgePieChart from '../components/UsersAgePieChart';
 
 
 const mapStateToProps = (state) => ({
@@ -17,7 +18,6 @@ class UsersPageContainer extends React.Component {
     let {dispatch} = this.props;
     dispatch(fetchUsers(1,{},{},100));
   };
-
 
   render() {
     let {users} = this.props;
@@ -41,6 +41,18 @@ class UsersPageContainer extends React.Component {
             <UsersAgeLineChart users={users.list}/>
           </Col>
         </Row>
+        <Row>
+          <Col md={6}>
+            <h2 className="text-center">Pie chart</h2>
+            <UsersAgePieChart users={users.list}/>
+          </Col>
+          <Col md={6}>
+            <h2 className="text-center">Map chart</h2>
+            <h2 className="text-center">TODO</h2>
+          </Col>
+        </Row>
+
+
       </div>
     )
   }

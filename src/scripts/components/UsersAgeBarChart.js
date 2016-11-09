@@ -2,7 +2,7 @@ import React from 'react';
 import * as d3 from 'd3';
 import _ from 'lodash';
 
-class UsersAgeChartComponent extends React.Component {
+class UsersAgeBarChartComponent extends React.Component {
 
   render() {
     if (this.props.users && this.props.users.length)
@@ -58,7 +58,7 @@ class UsersAgeChartComponent extends React.Component {
     svg.attr('width', container.width)
       .attr('height', container.height);
 
-    let {data, domainX, domainY} = UsersAgeChartComponent.getChartData(users),
+    let {data, domainX, domainY} = UsersAgeBarChartComponent.getChartData(users),
       x = d3.scaleBand().range([margin.left, width]).padding(0.1),
       y = d3.scaleLinear().range([height, 0]);
 
@@ -150,4 +150,4 @@ class UsersAgeChartComponent extends React.Component {
 
 }
 
-export default UsersAgeChartComponent;
+export default UsersAgeBarChartComponent;

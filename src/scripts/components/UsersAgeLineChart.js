@@ -43,7 +43,7 @@ class UsersAgeLineChartComponent extends React.Component {
     })
   };
 
-  renderChart = () => {
+  renderChart = (needTransition = false) => {
     let {el, svg, tooltip, props: {users}} = this;
 
     if (!el) return;
@@ -88,7 +88,6 @@ class UsersAgeLineChartComponent extends React.Component {
       .data(data)
       .enter().append('circle')
         .attr('class', 'line-point')
-        .attr('r', pointsSize)
         .attr('cy', (d) => y(d.count))
         .attr('cx', (d) => x(d.date))
         .on('mouseover', mouseOver)
@@ -96,6 +95,10 @@ class UsersAgeLineChartComponent extends React.Component {
           tooltip.style('visibility', 'hidden')
         });
 
+    if(needTransition) {
+      points = points.attr('r', 0).transition()
+    }
+    points.attr('r', pointsSize);
 
     // Append x axis
     svg.append('g')
